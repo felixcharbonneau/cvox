@@ -1,5 +1,5 @@
 # cvox
-Voxel engine in c++
+Voxel engine in c++ (very much a work in progress, nothing works right now)
 
 
 
