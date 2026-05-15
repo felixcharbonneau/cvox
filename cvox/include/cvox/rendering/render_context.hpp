@@ -16,6 +16,8 @@ public:
 
     std::shared_ptr<daxa::RasterPipeline>
     add_raster_pipeline(const daxa::RasterPipelineCompileInfo2& info);
+    std::shared_ptr<daxa::ComputePipeline>
+    add_compute_pipeline(const daxa::ComputePipelineCompileInfo2& info);
 
     daxa::Swapchain&
     swapchain() noexcept

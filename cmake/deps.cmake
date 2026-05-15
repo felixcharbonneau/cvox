@@ -28,15 +28,16 @@ CPMAddPackage(
 
 CPMAddPackage(
     NAME            daxa
-    GIT_REPOSITORY  https://github.com/Ipotrick/Daxa
-    GIT_TAG         3.3.1
+    GIT_REPOSITORY  https://github.com/expenses/Daxa
+    GIT_TAG         linux-fixes
     GIT_SHALLOW     TRUE
     GIT_PROGRESS    TRUE
-    PATCHES         ${CMAKE_CURRENT_SOURCE_DIR}/patches/daxa-swapchain-max.patch
-    OPTIONS         "DAXA_ENABLE_UTILS_PIPELINE_MANAGER_GLSLANG"
-    OPTIONS         "BUILD_SHARED_LIBS OFF"
-    OPTIONS         "DAXA_ENABLE_UTILS_MEM ON"
-    OPTIONS         "DAXA_ENABLE_UTILS_TASK_GRAPH ON"
+    OPTIONS
+        "BUILD_SHARED_LIBS OFF"
+        "DAXA_ENABLE_UTILS_TASK_GRAPH ON"
+        "DAXA_ENABLE_UTILS_MEM ON"
+        "DAXA_ENABLE_UTILS_IMGUI ON"
+        "DAXA_ENABLE_UTILS_PIPELINE_MANAGER_GLSLANG ON"
     SYSTEM          TRUE
 )
 

@@ -1,16 +1,8 @@
 #pragma once
-
 #include <daxa/daxa.inl>
 
-struct MyVertex
+struct ComputePush
 {
-    daxa_f32vec3 position;
-    daxa_f32vec3 color;
-};
-
-DAXA_DECL_BUFFER_PTR(MyVertex)
-
-struct MyPushConstant
-{
-    daxa_BufferPtr(MyVertex) my_vertex_ptr;
+    daxa_ImageViewId image;
+    daxa_u32vec2 frame_dim;
 };

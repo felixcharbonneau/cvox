@@ -39,34 +39,16 @@ public:
         glfwSwapBuffers(m_glfw_window_ptr);
     }
 
-    static inline daxa::NativeWindowPlatform
-    get_native_platform()
-    {
-        switch (glfwGetPlatform())
-        {
-        case GLFW_PLATFORM_WIN32:
-            return daxa::NativeWindowPlatform::WIN32_API;
-        case GLFW_PLATFORM_X11:
-            return daxa::NativeWindowPlatform::XLIB_API;
-        case GLFW_PLATFORM_WAYLAND:
-            return daxa::NativeWindowPlatform::WAYLAND_API;
-        default:
-            return daxa::NativeWindowPlatform::UNKNOWN;
-        }
-    }
-
-    inline daxa::NativeWindowHandle
-    get_native_handle() const
+    inline daxa::NativeWindowInfo
+    get_native_window_info()
     {
 #if defined(_WIN32)
-        return glfwGetWin32Window(m_glfw_window_ptr);
+        return daxa::NativeWindowInfoWin32{
+            .hwnd = glfwGetWin32Window(m_glfw_window_ptr),
+        };
 #elif defined(__linux__)
-        switch (get_native_platform())
-        {
-        case daxa::NativeWindowPlatform::XLIB_API:
-        default:
-            return reinterpret_cast<daxa::NativeWindowHandle>(glfwGetX11Window(m_glfw_window_ptr));
-        }
+        return daxa::NativeWindowInfoXlib{
+            .window = reinterpret_cast<void*>(glfwGetX11Window(m_glfw_window_ptr))};
 #endif
     }
 
@@ -74,6 +56,18 @@ public:
     get_glfw_window() const
     {
         return m_glfw_window_ptr;
+    }
+
+    inline uint32_t
+    width() const noexcept
+    {
+        return m_width;
+    }
+
+    inline uint32_t
+    height() const noexcept
+    {
+        return m_height;
     }
 
 private:
